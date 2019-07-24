@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { RestCountriesService } from "src/app/services/rest-countries.service";
-import { Travel } from "src/app/models/travel";
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { RestCountriesService } from 'src/app/services/rest-countries.service';
+import { Travel } from 'src/app/models/travel';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 
 const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
@@ -10,7 +11,7 @@ const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
-  
+
 
 })
 export class AppComponent {
@@ -20,7 +21,7 @@ export class AppComponent {
 
   travelForm: FormGroup;
   countries: any[];
-
+  error: any = {isError: false, errorMessage: ''};
   dayCalc: number;
   countryCalc: string[];
 
@@ -74,30 +75,35 @@ export class AppComponent {
       );
     });
     this.travelForm = this.fb.group({
-      country: ["", [Validators.required]],
-      startDate: ["", [Validators.required]],
-      endDate: ["", [Validators.required]],
-      note: ["", [Validators.required]],
+      country: ['', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
+      note: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(200)]],
       agree: [false, [Validators.requiredTrue]]
     });
   }
+  compareTwoDates(){
+    if(new Date(this.travelForm.controls['endDate'].value) < new Date(this.travelForm.controls['startDate'].value)){
+       this.error={isError:true,errorMessage:'End Date cant be before start date'};
+    }
+ }
 
   get country() {
-    return this.travelForm.get("country");
+    return this.travelForm.get('country');
   }
 
   get startDate() {
-    return this.travelForm.get("startDate");
+    return this.travelForm.get('startDate');
   }
   get endDate() {
-    return this.travelForm.get("endDate");
+    return this.travelForm.get('endDate');
   }
   get note() {
-    return this.travelForm.get("note");
+    return this.travelForm.get('note');
   }
 
   get agree() {
-    return this.travelForm.get("agree");
+    return this.travelForm.get('agree');
   }
 
   addTravel(value) {

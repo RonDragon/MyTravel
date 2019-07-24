@@ -11,9 +11,7 @@ export class RestCountriesService {
   constructor(private httpClient: HttpClient) {}
 
   public getAllCountries(): Observable<any[]> {
-    return this.httpClient.get<any[]>("https://restcountries.eu/rest/v2/all", {
-      withCredentials: true
-    });
+    return this.httpClient.get<any[]>("https://restcountries.eu/rest/v2/all");
   }
 
 }

@@ -4,32 +4,38 @@
   </h2>
 </mat-card>
 <hr>
-<form [formGroup]="travelForm" >
-    <br>
-    <mat-form-field class="example-full-width">
-      <input  type="text" placeholder="select country" aria-label="Number" matInput formControlName="country"
-        [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of countries" [value]="option.name">
-          {{option.name}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="date" placeholder="startDate" formControlName="startDate">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="date" placeholder="endDate" formControlName="endDate">
-    </mat-form-field>
-    <mat-form-field>
-      <textarea matInput placeholder="note"  formControlName="note"> </textarea>
-    </mat-form-field>
-    <mat-checkbox formControlName="agree" color="warn">Are you sure?</mat-checkbox>
-    <button mat-raised-button [disabled]="travelForm.invalid" color="warn" 
-    (click)='addTravel(travelForm.value)' >Submit</button>
-  </form>
+<form [formGroup]="travelForm">
+  <br>
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="select country" aria-label="Number" matInput formControlName="country"
+      [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of countries" [value]="option.name">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="date" placeholder="startDate" formControlName="startDate">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="endDate" id="formControlName_date_end" type="date" (blur)="compareTwoDates()">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="note" formControlName="note"> </textarea>
+  </mat-form-field>
+  <mat-checkbox formControlName="agree" color="warn">Are you sure?</mat-checkbox>
+  <button mat-raised-button [disabled]="travelForm.invalid || error.isError" color="warn"
+    (click)='addTravel(travelForm.value)'>Submit</button>
+  <br>
+  <div *ngIf="error.isError" class="alert alert-danger">
+    {{ error.errorMessage }}
+  </div>
+</form>
 <hr>
-  <table class="table table-hover">
+<table class="table table-hover">
   <thead>
     <th>country</th>
     <th>start Date</th>
@@ -38,24 +44,24 @@
   </thead>
   <tbody>
     <tr *ngFor="let trav of travels">
-      <td >{{trav.country}}</td>
-      <td >{{trav.startDate}}</td>
-      <td >{{trav.endDate}}</td>
-      <td >{{trav.note}}</td>
+      <td>{{trav.country}}</td>
+      <td>{{trav.startDate}}</td>
+      <td>{{trav.endDate}}</td>
+      <td>{{trav.note}}</td>
     </tr>
   </tbody>
-    <br>
-    <table class="table table-hover">
+  <br>
+  <table class="table table-hover">
     <thead>
       <th>country traveled</th>
       <th> calculate days</th>
     </thead>
     <tbody>
-    <tr>
-      <td >{{countryCalc.length}}</td>
-      <td>{{dayCalc}}</td>
-    </tr>
-  </tbody>
-</table>
+      <tr>
+        <td>{{countryCalc.length}}</td>
+        <td>{{dayCalc}}</td>
+      </tr>
+    </tbody>
+  </table>
 
 </table>
