@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee+Shade&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Finger+Paint&display=swap');
+mat-card{
+    background-color: rgb(255, 93, 93);
+    color: #2c2a2a;
+    font-family: 'Bungee Shade', cursive;
+    text-align: center;
+    text-shadow: -18px 15px 8px ;
+    transition: 1.5s;
+
+
+}
+
+mat-card:hover{
+    background-color: rgb(247, 67, 67);
+    color: #2c2a2a;
+    font-family: 'Bungee Shade', cursive;
+    text-align: center;
+    text-shadow: 0px 1px 4px ;
+    transition: 1.5s;
+}
+form{
+text-align: center;
+
+}
+table{
+    transition: 0.5s;
+
+}
+thead{
+    transition: 0.5s;
+    border-radius: 25px;
+
+}
+td{
+    font-family: 'Finger Paint', cursive;
+}
+td:hover{
+    background-color: rgb(255, 93, 93);
+    transition: 0.5s;
+    
+}
+th{
+    font-family: 'Bungee Shade', cursive;
+    transition: 0.5s;
+
+}
+th:hover{
+    background-color: rgb(206, 96, 96);
+    transition: 0.5s;
+}
