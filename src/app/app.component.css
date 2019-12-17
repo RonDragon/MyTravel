@@ -41,6 +41,7 @@ td:hover{
     
 }
 th{
+    color: red;
     font-family: 'Bungee Shade', cursive;
     transition: 0.5s;
 
